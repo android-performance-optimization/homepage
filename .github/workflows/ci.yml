@@ -1,9 +1,14 @@
 name: ci 
 on:
-  push:
-    branches:
-      - master 
-      - main
+    # Triggers the workflow on push or pull request events but only for the "main" branch
+    push:
+      branches: [ "main" ]
+    pull_request:
+      branches: [ "main" ]
+  
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
 permissions:
   contents: write
 jobs:
@@ -33,5 +38,5 @@ jobs:
           REPO: git@github.com:android-performance-optimization/android-performance-optimization.github.io.git
           SQUASH_HISTORY: "false"
           BRANCH:  main
-          FOLDER: public
+          FOLDER: site
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
