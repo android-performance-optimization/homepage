@@ -1,17 +1,6 @@
-# Welcome to MkDocs Sample
+![Image title](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/june/title.jpg)
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+# 前言
+Android 性能优化站点，专注于 Android 性能优化领域，分享精选博客，学习路线，行业动态等资源
 
-## Commands
-
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+<!-- ### 关于 -->

@@ -1,3 +1,72 @@
 site_name: Android 性能优化
+site_url: https://android-performance-optimization.github.io/
+site_description: 专注于 Android 性能优化领域，分享精选博客，学习路线，行业动态等资源
+# Configuration
 theme:
   name: material
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.prune
+    - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  language: 'zh'
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: logo
+
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - footnotes
+
+# Page tree
+nav:
+  - 简介:
+    - 前言: index.md
+    - 关于本项目: about.md
+  - 学习资源: resource/index.md
+  - 筑基手册:
+    - foundation/elf-file-detail.md
+  # - Blog:
+  #   - blog/index.md
+  #   - 2022:
+  #     - blog/posts/blog-support-just-landed.md
+  #     - blog/posts/chinese-search-support.md
+  #   - 2021:
+  #     - blog/posts/the-past-present-and-future.md
+  #     - blog/posts/excluding-content-from-search.md
+  #     - blog/posts/search-better-faster-smaller.md
