@@ -45,6 +45,7 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+  favicon: assets/favicon.png
   icon:
     logo: logo
 
@@ -55,8 +56,8 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - 简介:
-    - 前言: index.md
+  - 首页:
+    - 简介: index.md
     - 关于本项目: about.md
   - 学习资源: resource/index.md
   - 筑基手册:
