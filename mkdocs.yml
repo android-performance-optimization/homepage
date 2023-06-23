@@ -59,6 +59,9 @@ markdown_extensions:
   - md_in_html
   - footnotes
 
+plugins:
+  - git-revision-date-localized
+  
 # Page tree
 nav:
   - 首页:

@@ -27,7 +27,9 @@ jobs:
           restore-keys: |
             mkdocs-material-
       - name: Setup mkdocs Plugin
-        run: pip3 install mkdocs-material
+        run: |
+          pip3 install mkdocs-material
+          pip3 install mkdocs-git-revision-date-localized-plugin
       
       - name: Build mkdocs Page
         run: mkdocs build
