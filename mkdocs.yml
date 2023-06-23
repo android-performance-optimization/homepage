@@ -58,7 +58,7 @@ markdown_extensions:
 nav:
   - 首页:
     - 简介: index.md
-    - 关于本项目: about.md
+    - 关于本项目: intro/about.md
   - 学习资源: resource/index.md
   - 筑基手册:
     - foundation/elf-file-detail.md
