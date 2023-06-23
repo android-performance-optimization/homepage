@@ -60,6 +60,8 @@ markdown_extensions:
   - footnotes
 
 plugins:
+  - search:
+      lang: ja
   - git-revision-date-localized
   
 # Page tree
