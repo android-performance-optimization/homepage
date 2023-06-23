@@ -72,12 +72,5 @@ nav:
   - 学习资源: resource/index.md
   - 筑基手册:
     - foundation/elf-file-detail.md
-  # - Blog:
-  #   - blog/index.md
-  #   - 2022:
-  #     - blog/posts/blog-support-just-landed.md
-  #     - blog/posts/chinese-search-support.md
-  #   - 2021:
-  #     - blog/posts/the-past-present-and-future.md
-  #     - blog/posts/excluding-content-from-search.md
-  #     - blog/posts/search-better-faster-smaller.md
+  - 技术月报:
+    - news/news-2023-07.md
