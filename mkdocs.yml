@@ -48,8 +48,8 @@ theme:
         icon: material/brightness-4
         name: Switch to light mode
   font:
-    text: Roboto
-    code: Roboto Mono
+    text: 'Fira Sans'
+    code: 'Fira Mono'
   favicon: assets/favicon.png
   icon:
     logo: logo
