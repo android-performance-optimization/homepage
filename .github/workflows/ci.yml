@@ -16,20 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v4
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-      - uses: actions/cache@v3
-        with:
-          key: mkdocs-material-${{ env.cache_id }}
-          path: .cache
-          restore-keys: |
-            mkdocs-material-
+
       - name: Setup mkdocs Plugin
-        run: |
-          pip3 install mkdocs-material
-          pip3 install mkdocs-git-revision-date-localized-plugin
+        run: pip3 install -U -r requirements.txt
       
       - name: Build mkdocs Page
         run: mkdocs build

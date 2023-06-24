@@ -1,0 +1,2 @@
+mkdocs-material==9.1.16
+mkdocs-git-revision-date-localized-plugin==1.2.0
