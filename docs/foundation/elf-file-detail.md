@@ -86,7 +86,7 @@ ELF 文件头结构及相关常数被定义在`/usr/include/elf.h`文件中，re
 #### ELF 魔数
 头文件中比较有意思的是魔数，魔数的作用是用来确认文件的类型，操作系统在加载可执行文件时会检验魔数是否正确，如果不正确则会拒绝加载
 
-比如我们上面的输出，最开始的 4 个字节是所有 ELF 文件都必须相同的标识码：0x7f,0x45,0x4c,0x46, 第一字节对应 DEL 控制符的 ASCII 码，后面 3 个字节则正好是 ELF 三个字母的 ASCII 码
+比如我们上面的输出，最开始的 4 个字节是所有 ELF 文件都必须相同的标识码：`0x7f`, `0x45`, `0x4c`, `0x46`, 第一字节对应 DEL 控制符的 ASCII 码，后面 3 个字节则正好是 ELF 三个字母的 ASCII 码
 
 第 5 个字节用于标识 ELF 文件类，0x01 表示 32 位，0x02 表示 64 位，第 6 个字节用于标记字节序，规定该 ELF 文件是大端还是小端的，第 7 个字节用于标记 ELF 文件主版本号，一般是 1
 
@@ -197,19 +197,84 @@ Disassembly of section .text:
 `Disassembly of section .text`则是代码段反汇编的结果，可以很明显地看到，.text 段中的内容就是`SimpleSection.c`里两个函数`func1()`和`main()`的指令。
 
 ### 数据段与只读数据段
+接下来我们通过 objdump 命令看看数据段与只读数据段的内容
+
 ```
 $ objdump -x -s -d SimpleSection.o
+
+...
+
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  1 .data         00000008  0000000000000000  0000000000000000  000000a0  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .rodata       00000004  0000000000000000  0000000000000000  000000a8  2**0
+                  CONTENTS, ALLOC, LOAD, READONLY, DATA
+
+Contents of section .data:
+ 0000 54000000 55000000                    T...U...        
+Contents of section .rodata:
+ 0000 25640a00                             %d..                
 ```
 
-### bss 段
-存放未初始化的全局变量和局部静态变量
+.data 段保存的是那些已经初始化了的全局静态变量和局部静态变量，`SimpleSection.c`中的`global_init_var`与`static_var`两个变量属于这种情况，这两个变量每个4个字节，一共刚好 8 个字节，所以 .data 段的大小为8个字节
 
-bss 不占空间：https://www.jianshu.com/p/52c7445af23a
+.rodata 段存放的是只读数据，一般是程序中的只读变量(如 const 修饰的变量)和字符串常量，比如在`SimpleSection.c`中调用`printf`时用到的字符串常量，就储存在 .rodata 段中。需要注意的是，有的编译器会把字符串常量放在 .data 段中，而不会单独放在 .rodata 段中
 
-https://www.zhihu.com/question/293002441
+接下来我们看下两个段中存储的内容
+
+.data 中存储的内容即`0x00000054`与`0x00000055`，以小端序存放，它们的值正好对应十进制的`84`与`85`，也就是我们赋给`global_init_var`与`static_var`的值
+
+.rodata 中存储的内容为`0x25640a00`，正好对应`%d\n`的 ASCII 码，可以对照[ASCII码一览表，ASCII码对照表](http://c.biancheng.net/c/ascii/)查看
+
+### .bss 段
+.bss 段存放未初始化的全局变量和局部静态变量，那么问题来了，为什么要把已初始化的变量和未初始化的变量分开存储的，为什么不直接放在 .data 段中？
+
+答案是 .bss 段不占空间，我们接下来看一个直观的例子，来看看 .bss 的作用
+
+```
+$ echo "char array[1024*1024*64] = {'A'}; int main() {return 0;}" | gcc -x c - -o data
+$ ls -lh data
+-rwxrwxrwx 1 codespace codespace 65M Jun 25 01:26 data
+$ echo "char array[1024*1024*64]; int main() {return 0;}" | gcc -x c - -o bss
+$ ls -lh bss
+-rwxrwxrwx 1 codespace codespace 17K Jun 25 01:27 bss
+```
+
+- 示例 1 中，array 变量已经被初始化，存放在 .data 段中，占用文件空间，因此整个文件大小共有 65 M
+- 示例 2 中，array 变量未被初始化，存放在 .bss 段中，不占用文件空间，因此整个文件大小只有 17 K
+
+可以看到，差别非常大。当然 .bss 段不占据实际的磁盘空间，但它的大小与符号还是要有地方存储，.bss 段的大小记录在段表中，符号记录在符号表中。当文件加载运行时，才分配空间以及初始化
+
+接下来我们用 objdump 命令来看看`SimpleSection.o` 的 .bss 段的内容
+
+```
+$ objdump -x -s -d SimpleSection.o
+
+...
+Sections:
+Idx Name          Size      VMA               LMA               File off  Algn
+  2 .bss          00000004  0000000000000000  0000000000000000  000000a8  2**2
+                  ALLOC
+SYMBOL TABLE:
+0000000000000000 l     O .bss   0000000000000004 static_var2.1921
+0000000000000004       O *COM*  0000000000000004 global_uninit_var
+```
+
+可以看到，我们本来预期 .bass 段中会有`global_uninit_var`与`static_var2`两个变量，共 8 个字节，实际上只有`static_var2`一个变量，4 个字节
+
+这是因为有些编译器会将全局的未初始化变量存放在目标文件.bss 段，有些则不存放，只是预留一个未定义的全局变量符号，等到最终链接成可执行文件的时候再在 .bss 段分配空间
 
 ### 其他段
 
 
 ## Elf 中的符号
+
+
+
+
+
+
+
+
 
