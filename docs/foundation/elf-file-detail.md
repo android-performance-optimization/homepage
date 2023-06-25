@@ -266,15 +266,124 @@ SYMBOL TABLE:
 这是因为有些编译器会将全局的未初始化变量存放在目标文件.bss 段，有些则不存放，只是预留一个未定义的全局变量符号，等到最终链接成可执行文件的时候再在 .bss 段分配空间
 
 ### 其他段
+除了 .text, .data, .bss 这 3 个最常用的段之外，ELF 文件也包含一些其他的段，下面列出了一些常见的段
 
+| 段名 |说明  |
+| --- | --- |
+|  .rodata1| 只读数据段，存放只读数据，与 .rodata 一样 |
+|  .comment| 存放编译器版本信息 |
+|  .debug| 调试信息 |
+|  .dynamic| 动态链接信息 |
+|  .hash| 符号哈希表 |
+|  .line| 调试时的行号表，即源代码行号与编译后指令的对应表 |
+|  .note| 额外的编译信息，如程序的公司名，发布版本号等 |
+|  .strtab| 字符串表，用于存储 ELF 中的各种字符串 |
+|  .symtab | 符号表 |
+|  .shstrtab| 段表字符串表，用于存储段表中用到的字符串 |
+|  .plt .got | 动态链接的跳转表和全局入口表 |
+|  .init .finit | 程序初始化与终结代码段 |
+|  .rel.text | 重定位表 |
+
+这里面的很多段我们之后都会用到，比如 PLT Hook 中会用到的 .plt .got 段，在静态链接中会用到重定位表，这里可以先留个印象
 
 ## Elf 中的符号
+链接过程的本质是把多个目标文件按照一定的规则拼接起来，在链接过程中，目标文件的拼接其实就是目标文件之间对地址的引用，即对函数和变量的地址的引用。
 
+每个函数或变量都有自己独特的名字，才能避免链接过程中不同变量和函数之间的混淆。在链接中，我们将函数和变量统称为符号（Symbol），函数名或变量名就是符号名（Symbol Name）。
 
+整个链接过程正是基于符号才能够正确完成。链接过程中很关键的一部分就是符号的管理，每一个目标文件都会有一个相应的符号表（Symbol Table），这个表里面记录了目标文件中所用到的所有符号。每个定义的符号有一个对应的值，叫做符号值（Symbol Value），对于变量和函数来说，符号值就是它们的地址
 
+我们将符号表中的符号分为以下几类:
 
+- 定义在本目标文件的全局符号，可以被其他目标文件引用。比如`SimpleSection.o`里面的`func1`、`main`和`global_init_var`。
+- 在本目标文件中引用的全局符号，却没有定义在本目标文件，这一般叫做外部符号（External Symbol），也就是我们前面所讲的符号引用。比如`SimpleSection.o`里面的`printf`。
+- 段名，这种符号往往由编译器产生，它的值就是该段的起始地址。比如`SimpleSection.o`里面的`.text`、`.data`等。
+- 局部符号，这类符号只在编译单元内部可见。比如`SimpleSection.o`里面的`static_var`和`static_var2`。调试器可以使用这些符号来分析程序或崩溃时的核心转储文件。这些局部符号对于链接过程没有作用，链接器往往也忽略它们。
+- 行号信息，即目标文件指令与源代码中代码行的对应关系，它也是可选的。”
 
+其中最值得关注的就是全局符号，因为链接过程只关心全局符号的相互拼接，局部符号、段名、行号等都是次要的，它们对于其他目标文件来说是“不可见”的，在链接过程中也是无关紧要的
 
+### ELF 符号表的结构
+首先我们通过 readelf 命令来查看`SimpleSection.o` 的符号表
 
+```
+$ readelf -s SimpleSection.o
 
+Symbol table '.symtab' contains 18 entries:
+   Num:    Value          Size Type    Bind   Vis      Ndx Name
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS SimpleSection.c
+     2: 0000000000000000     0 SECTION LOCAL  DEFAULT    1 
+     3: 0000000000000000     0 SECTION LOCAL  DEFAULT    3 
+     4: 0000000000000000     0 SECTION LOCAL  DEFAULT    4 
+     5: 0000000000000000     0 SECTION LOCAL  DEFAULT    5 
+     6: 0000000000000004     4 OBJECT  LOCAL  DEFAULT    3 static_var.1920
+     7: 0000000000000000     4 OBJECT  LOCAL  DEFAULT    4 static_var2.1921
+     8: 0000000000000000     0 SECTION LOCAL  DEFAULT    7 
+     9: 0000000000000000     0 SECTION LOCAL  DEFAULT    8 
+    10: 0000000000000000     0 SECTION LOCAL  DEFAULT    9 
+    11: 0000000000000000     0 SECTION LOCAL  DEFAULT    6 
+    12: 0000000000000000     4 OBJECT  GLOBAL DEFAULT    3 global_init_var
+    13: 0000000000000004     4 OBJECT  GLOBAL DEFAULT  COM global_uninit_var
+    14: 0000000000000000    40 FUNC    GLOBAL DEFAULT    1 fun1
+    15: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND _GLOBAL_OFFSET_TABLE_
+    16: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT  UND printf
+    17: 0000000000000028    55 FUNC    GLOBAL DEFAULT    1 main
+```
+
+接下来我们介绍一个各个列的含义，如下表所示
+
+| 字段 |  含义|
+| --- | --- |
+| Name | 符号名 |
+| Value | 符号对应的值，不同的符号，其值的含义不同，见下文详细解析 |
+| Size | 符号大小，对于包含数据的符号，这个值是数据类型的大小，比如一个 int 类型的符号占 4 个字节，如果该值为 0 表示该符号大小为 0 或未知 |
+| Type | 符号类型，分为未知符号类型，数据对象类型，函数类型，文件类型等 |
+| Bind | 绑定信息，用于区分局部符号，全局符号与弱引用符号 |
+| Vis | 在 C/C++ 中未使用，可忽略 |
+| Ndx | 符号所在的段,如果符号定义在本目标文件中，该值表示符号所在段在段表中的下标。<br>如果该值为 ABS,表示该符号包含了一个绝对的值，比如上面的文件类型的符号。<br>如果该值为 COM，表示该值是一个 Common 块类型的符号。<br>如果该值为 UND，表示为定义，说明该符号在本目标文件中被引用，在其他文件中声明 |
+
+上面说到不同的符号，其值含义不同，具体可以分为以下几种
+
+- 在目标文件中，如果是符号的定义并且该符号不是`COMMON块`类型的，则`Value`表示该符号在段中的偏移。比如`SimpleSection.o`中的`func1`、`main`和`global_init_var`。
+- 在目标文件中，如果符号是`COMMON块`类型的，则`Value`表示该符号的对齐属性。比如`SimpleSection.o`中的`global_uninit_var`。
+- 在可执行文件中，`Value`表示符号的虚拟地址。这个虚拟地址对于动态链接器来说十分有用。
+
+### C++ 的 Name Mangling 机制
+我们前面提到每个函数或变量都有自己独特的名字，才能避免链接过程中不同变量和函数之间的混淆，因此在 C 语言目标文件链接过程中，如果有两个文件中都有`fun1`函数，链接过程就会报错
+
+但当程序很大时，不同的模块由多人开发，如果命名规范不严格，很容易出现符号冲突的问题，于是像C++这样的后来设计的语言开始考虑到了这个问题，增加了名称空间（Namespace）的方法来解决多模块的符号冲突问题。
+
+同时 C++拥有类、继承、虚机制、重载、名称空间等这些特性，它们使得符号管理更为复杂。最简单的例子，两个相同名字的函数`func(int)`和`func(double)`，尽管函数名相同，但是参数列表不同，那么编译器和链接器在链接过程中如何区分这两个函数呢？为了支持 C++ 这些复杂的特性，人们发明了符号修饰（Name Decoration）机制
+
+比如下面这段代码
+
+```c++
+int    func(int i)           { return 0;     }
+float  func(int i, float f)  { return i + f; }
+double func(int i, double d) { return i+d;   }
+```
+
+经过name mangling操作后，得到的符号表中和`func`有关的内容如下：
+
+```
+$ g++ main.cc -o main.o && objdump -t main.o
+main.o:     file format elf64-x86-64
+
+SYMBOL TABLE:
+0000000000001157 g     F .text  000000000000001c              _Z4funcid
+000000000000113b g     F .text  000000000000001c              _Z4funcif
+0000000000001129 g     F .text  0000000000000012              _Z4funci
+...
+
+```
+
+可以看到，所有的符号都以`_Z`开头，前缀`_Z`是 GCC 的规定，具体是怎样转化的这里就不详细介绍了，有兴趣的读者可以参考GCC的名称修饰标准。同时我们也可以利用 nm 或 c++filt 等工具来解析被修饰的符号，不用自己手动解析
+
+Name Mangling 机制使用地非常广泛，当我们查看 android so 的符号表时，可以看到很多以`_Z`开头的符号，就可以知道他们都是被修饰过的符号
+
+## 总结
+本文详细介绍了 ELF 文件的详细结构，包括文件头，段表，各个段的结构，符号表的结构等内容。
+
+这些基础知识可能有些枯燥，但是这些知识点在 Android 性能优化中的应用还是很广泛的，因此还是有必要了解一下这些知识点的
 
