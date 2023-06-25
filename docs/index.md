@@ -1,7 +1,7 @@
 # ![Image title](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/june/title.jpg)
 性能优化是 Android 开发进阶必备技能之一，是项目开发过程中的重点，痛点同时也是难点。
 
-这是一个 Andriod 性能优化站点，专注于 Android 性能优化领域，分享精选博客，学习路线，业界动态等资源
+这是一个 Andriod 性能优化站点，专注于 Android 性能优化领域，分享基础知识，实战方案，学习路线，技术动态等资源
 
 ## 本站内容
 本站预期将包含以下内容，正在建设中，敬请期待
