@@ -11,6 +11,7 @@
 
 ## 书籍推荐
 - [程序员的自我修养——链接、装载与库](https://book.douban.com/subject/3652388/)
+- [深入理解Android：Java虚拟机ART](https://book.douban.com/subject/33390277/)
 
 ## 开源项目
 - [https://github.com/Tencent/matrix](https://github.com/Tencent/matrix)
