@@ -72,5 +72,6 @@ nav:
   - 学习资源: resource/index.md
   - 筑基手册:
     - foundation/elf-file-detail.md
+    - foundation/static-link.md
   - 技术月报:
     - news/news-2023-07.md
