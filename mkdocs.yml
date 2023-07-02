@@ -23,7 +23,7 @@ theme:
     - navigation.indexes
     # - navigation.instant
     # - navigation.prune
-    - navigation.sections
+    # - navigation.sections
     - navigation.tabs
     # - navigation.tabs.sticky
     - navigation.top
@@ -71,7 +71,10 @@ nav:
     - 如何参与: intro/htc.md
   - 学习资源: resource/index.md
   - 筑基手册:
-    - foundation/elf-file-detail.md
-    - foundation/static-link.md
+    - 程序员的自我修养:
+      - foundation/self-cultivation/elf-file-detail.md
+      - foundation/self-cultivation/static-link.md
+    - Framework 层基础:
+      - foundation/framework/activity-start.md
   - 技术月报:
     - news/news-2023-07.md
