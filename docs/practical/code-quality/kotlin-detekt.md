@@ -26,7 +26,7 @@
 ## `IDE`接入`DeteKt`插件
 如果能在`IDE`中提示代码中存在的问题，应该是最快发现问题的方式，`DeteKt`也贴心的为我们准备了插件，如下所示：
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bb73044ade2540cd91eb77cb39d680dd~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p14.webp)
 
 主要可以配置以下内容：    
 1. `DeteKt`开关
@@ -37,11 +37,11 @@
 
 `DeteKt IDE`插件可以实时提示问题(包括自定义规则)，如下图所示，我们添加了自定义禁止使用`kae`的规则：  
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/64ab452fbdab4122be9729c87469071f~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p15.webp)
 
 对于一些支持自动修复的格式问题，`DeteKt`插件支持自动格式化，同时也可以配置快捷键，一键自动格式化，如下所示：
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/adc92211090f4ab0b42bdcdb51f64bfd~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p16.webp)
 
 ## `CLI`命令行方式接入`DeteKt`
 `DeteKt`支持通过`CLI`命令行方式接入，支持只检测几个文件，比如本次`commit`提交的文件
@@ -163,7 +163,7 @@ tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
 
 通过以上方式就接入成功了，运行`./gradlew detektDebug`就可以开始检测了，扫描结果可在终端直接查看，并可以直接定位到问题代码处，也可以在`build/reprots/`路径下查看输出的报告文件：
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/86350619f937491e8695b9b9b1ca5054~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p17.webp)
 
 ## 自定义`Detekt`检测规则
 要落地自己制定的代码规范，不可避免的需要自定义规则，当然我们首先要看下`DeteKt`自带的规则，是否已经有我们需要的，只需把开关打开即可.
@@ -325,11 +325,11 @@ jobs:
 
 这样在每次提交`PR`的时候，就都会自动调用该`workflow`进行检测了，检测不通过则不允许合并，如下所示：  
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1b47fe23c59545a79f85a0f4e63a0e1c~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p18.webp)
 
 点进去也可以看到详细的报错，具体是哪一行代码检测不通过，如图所示：
 
-![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a39a667b6af44652850148a2cb9c3096~tplv-k3u1fbpfcp-zoom-1.image)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p19.webp)
 
 ## 总结
 本文主要介绍了`DeteKt`的接入与如何自定义规则，通过`IDE`集成，`CLI`命令行方式与`Gradle`插件方式接入，以及`CI`自动检测，可以保证代码规范，`IDE`提示，`CI`检测三者的统一，方便提前暴露问题，提高代码质量。

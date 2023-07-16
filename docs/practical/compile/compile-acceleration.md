@@ -82,7 +82,7 @@ org.gradle.unsafe.configuration-cache-problems=warn
 
 开启了`Configuration cache`之后效果还是比较明显的，如果构建脚本没有发生变化可以直接跳过配置阶段
 
-![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p10.webp)
+![](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/july/p11.webp)
 
 `Android`官方给出了一个开启`Configuration cache`前后的对比，可以看出在这个`benchmark`中可以得到约30%的提升(当然是在配置阶段耗时占比越高的时候效果越明显，全量编译时应该不会有这样的比例)
 
