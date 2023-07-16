@@ -77,5 +77,7 @@ nav:
       - foundation/self-cultivation/elf-load.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
+    - 实用工具系列:
+      - foundation/tools/native-hook.md
   - 技术月报:
     - news/news-2023-07.md
