@@ -74,6 +74,7 @@ nav:
     - 程序员的自我修养:
       - foundation/self-cultivation/elf-file-detail.md
       - foundation/self-cultivation/static-link.md
+      - foundation/self-cultivation/elf-load.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
   - 技术月报:
