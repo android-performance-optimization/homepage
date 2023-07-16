@@ -79,5 +79,13 @@ nav:
       - foundation/framework/activity-start.md
     - 实用工具系列:
       - foundation/tools/native-hook.md
+  - 实战手册:
+    - 编译优化:
+      - practical/compile/compile-acceleration.md
+      - practical/compile/now-in-android.md
+    - 代码质量优化:
+      - practical/code-quality/kotlin-detekt.md
+    - 稳定性优化:
+      - practical/stability/airbag.md
   - 技术月报:
     - news/news-2023-07.md
