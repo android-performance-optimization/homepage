@@ -1,4 +1,4 @@
-# Android 性能优化项目主页
+# Android 性能优化手册
 [https://android-performance-optimization.github.io/](https://android-performance-optimization.github.io/)
 
 ## 贡献流程

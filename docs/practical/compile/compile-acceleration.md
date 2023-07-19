@@ -41,7 +41,7 @@
 
 从上面这张图其实就可以看出`KAPT`慢的原因了，`KAPT` 通过与 `Java` 注解处理基础架构相结合，让大部分`Java`语言注解处理器能够在`Kotlin`中开箱即用。
 
-为此，`KAPT` 首先需要将 `Kotlin` 代码编译成 `JavaStubs`，这些`JavaStubs`中保留了`Java`注释处理器关注的信息。
+为此，`KAPT` 首先需要将 `Kotlin` 代码编译成 `JavaStubs`，这些`JavaStubs`中保留了`Java`注解处理器关注的信息。
 
 这意味着编译器必须多次解析程序中的所有符号 (一次生成`JavaStubs`，另一次完成实际编译)，但是生成`JavaStubs`的过程是非常耗时的，往往生成`Java Stubs`的时间比`APT`真正处理注解的时间要长
 
