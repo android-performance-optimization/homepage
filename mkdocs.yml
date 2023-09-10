@@ -76,6 +76,7 @@ nav:
       - foundation/self-cultivation/static-link.md
       - foundation/self-cultivation/elf-load.md
       - foundation/self-cultivation/dynamic-link.md
+      - foundation/self-cultivation/memory.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
