@@ -92,6 +92,7 @@ nav:
       - practical/stability/airbag.md
     - 速度优化:
       - practical/speed/json-serialization-speed.md
+      - practical/speed/kcp-gson-moshi.md
     - 内存优化:
       - practical/memory/memory-usage-analyse.md
   - 技术月报:
