@@ -96,9 +96,12 @@ nav:
     - 内存优化:
       - practical/memory/memory-usage-analyse.md
   - 技术月报:
-    - news/news-2023-12.md
-    - news/news-2023-11.md
-    - news/news-2023-10.md
-    - news/news-2023-09.md
-    - news/news-2023-08.md
-    - news/news-2023-07.md
+    - 2024:
+      - news/2024/news-2024-01.md
+    - 2023:
+      - news/2023/news-2023-12.md
+      - news/2023/news-2023-11.md
+      - news/2023/news-2023-10.md
+      - news/2023/news-2023-09.md
+      - news/2023/news-2023-08.md
+      - news/2023/news-2023-07.md
