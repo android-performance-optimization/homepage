@@ -82,6 +82,8 @@ nav:
       - foundation/kotlin-meta-programming/meta-programming-basic.md
       - foundation/kotlin-meta-programming/meta-data-introduction.md
       - foundation/kotlin-meta-programming/runtime-reflect.md
+      - foundation/kotlin-meta-programming/code-generate.md
+      - foundation/kotlin-meta-programming/symbol-process.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
