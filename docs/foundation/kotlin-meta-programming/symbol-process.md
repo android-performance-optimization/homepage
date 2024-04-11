@@ -20,7 +20,7 @@ Java 编译器提供了一套完善的符号处理的机制，即APT(Annotation 
 ### Kotlin 的符号
 Kotlin 的符号在 Google 的开源项目 KSP(Kotlin Symbol Processing，Kotlin 符号处理)当中给出，该项目目前已经成为 Kotlin 官方推荐的符号处理方案。
 
-Kotlin 目前存在两套语法树实现，即 FE1.0 的 PSI 和 K2 编译器当 中的 FIR。与 Java 不同，Kotlin 的语法树的 API 并不算是严格意义的 内部 API，因为这些 API 已经被大量应用在编译器插件和 IntelliJ 插件的实现当中了。不过，由于 Kotlin 编译器还在不断地重写过程中，因此抽象出 Kotlin 符号的 概念来屏蔽 Kotlin 编译器的内部实现显然是一个更好的选择，这与 APT 的实现如出一辙。
+Kotlin 目前存在两套语法树实现，即 FE1.0 的 PSI 和 K2 编译器当 中的 FIR。与 Java 不同，Kotlin 的语法树的 API 并不算是严格意义的 内部 API，因为这些 API 已经被大量应用在编译器插件和 IntelliJ 插件的实现当中了。不过，由于 Kotlin 编译器还在不断地重写过程中，因此抽象出 Kotlin 符号的概念来屏蔽 Kotlin 编译器的内部实现显然是一个更好的选择，这与 APT 的实现如出一辙。
 
 Kotlin 符号的实现依赖于语法树的实现，二者从命名和用法上也有着非常接近的地方。Kotlin 的符号类型都实现自 KSNode 接口，例如类符号 KSClassDeclaration，函数符号KSFunction，等等，这些对应于 APT 当中的 Element 接口及其实现类。
 
