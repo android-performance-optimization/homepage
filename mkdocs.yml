@@ -87,6 +87,8 @@ nav:
       - foundation/kotlin-meta-programming/code-static-analyse.md
       - foundation/kotlin-meta-programming/compiler-extension.md
       - foundation/kotlin-meta-programming/meta-programming-debug.md
+    - 重学 C/C++:
+      - foundation/restudy-c-cpp/environment-config.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
