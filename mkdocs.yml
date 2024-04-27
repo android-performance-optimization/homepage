@@ -93,6 +93,7 @@ nav:
       - foundation/restudy-c-cpp/environment-config.md
       - foundation/restudy-c-cpp/quick-start.md
       - foundation/restudy-c-cpp/basic-concept.md
+      - foundation/restudy-c-cpp/data-type.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
