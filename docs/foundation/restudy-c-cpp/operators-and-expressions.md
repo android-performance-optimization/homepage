@@ -34,13 +34,121 @@ C提供了所有常用的算术操作符：
 a = x = y + 3;
 ```
 
-### 单目操作符
-C具有一些单目操作符，也就是只接受一个操作数的操作符。它们是
+### 其它操作符
+本章还介绍了其他一些操作符
 
+- 单目操作符
+- 逻辑操作符
+- 条件操作符
+- 逗号操作符
+- 下标引用
+
+## 布尔值
+C并不具备显式的布尔类型，所以使用整数来代替。其规则是：零是假，任何非零值皆为真。
+
+## 左值和右值
+为了理解有些操作符存在的限制，你必须理解左值 (L-value)和右值 (R-value)之间的区别。这两个术语是多年前由编译器设计者所创造并沿用至今，尽管它们的定义并不与C语言严格吻合。
+
+左值就是那些能够出现在赋值符号左边的东西。右值就是那些可以出现在赋值符号右边的东西。
+
+## 编程练习
+### 练习 1
+编写一个程序，从标准输入读取字符，并把它们写到标准输出中。除了大写字母字符要转换为小写字母之外，所有字符的输出形式应该和它的输入形式完全相同。
+
+```c
+#include <stdio.h>
+#include <ctype.h> // 为了使用tolower函数
+
+int main() {
+    int c; // 使用int来存储字符，是因为EOF通常定义为-1，无法用char表示
+
+    // 使用getchar读取单个字符直到EOF
+    while((c = getchar()) != EOF) {
+        // 如果字符是大写字母，转换为小写
+        if(c >= 'A' && c <= 'Z') {
+            c = tolower(c);
+        }
+        // 输出字符
+        putchar(c);
+    }
+
+    return 0;
+}
 ```
-!　　 ++　　　　-　　 &　　　sizeof
-~　　 --　　　　+　　 *　　　(类型)
+
+### 练习 2
+编写一个程序，从标准输入读取字符，并把它们写到标准输出中。所有非字母字符都完全按照它的输入形式输出，字母字符在输出前进行加密。
+
+加密方法很简单：每个字母被修改为在字母表上距其13个位置（前或后）的字母。例如，A被修改为N，B被修改为O，Z被修改为M，以此类推。注意大小写字母都应该被转换
+
+```c
+#include <stdio.h>
+
+// 函数声明，用于ROT13加密
+char rot13_char(char c);
+
+int main() {
+    int c;  // 使用int来接收字符，以便能处理EOF情况
+
+    // 从标准输入中逐字符读取，直到EOF
+    while ((c = getchar()) != EOF) {
+        // 打印加密后的字符
+        putchar(rot13_char(c));
+    }
+
+    return 0;
+}
+
+// 实现ROT13加密的函数
+char rot13_char(char c) {
+    // 处理大写字母
+    if (c >= 'A' && c <= 'Z') {
+        return 'A' + (c - 'A' + 13) % 26;
+    }
+    // 处理小写字母
+    else if (c >= 'a' && c <= 'z') {
+        return 'a' + (c - 'a' + 13) % 26;
+    }
+    // 非字母字符不变
+    return c;
+}
 ```
+
+### 练习3
+编写一个函数，这个函数的返回值是把value的二进制位模式从左到右变换一下后的值，编写函数时要注意不要让它依赖于你的机器上整型值的长度。
+
+```c
+#include <stdio.h>
+
+// 函数声明
+unsigned int reverse_bits(unsigned int value) {
+    unsigned int result = 0;
+    unsigned int i;
+    for (i = 0; i < sizeof(value) * 8; i++) { // 遍历 value 的每一位
+        result <<= 1;  // 将 result 左移一位，为下一位做好空间
+        result |= (value & 1); // 将 value 的最低位加到 result 的最低位
+        value >>= 1;  // 将 value 右移一位，准备处理下一位
+    }
+    return result;
+}
+
+int main() {
+    unsigned int num = 1; // 测试示例
+    printf("Original number: %u\n", num);
+    unsigned int reversed = reverse_bits(num);
+    printf("Reversed bits: %u\n", reversed);
+
+    return 0;
+}
+```
+
+
+
+
+
+
+
+
 
 
 
