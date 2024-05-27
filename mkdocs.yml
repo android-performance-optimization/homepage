@@ -97,6 +97,7 @@ nav:
       - foundation/restudy-c-cpp/statement.md
       - foundation/restudy-c-cpp/operators-and-expressions.md
       - foundation/restudy-c-cpp/pointer.md
+      - foundation/restudy-c-cpp/function.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
