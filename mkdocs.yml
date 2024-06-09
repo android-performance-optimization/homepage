@@ -100,6 +100,7 @@ nav:
       - foundation/restudy-c-cpp/function.md
       - foundation/restudy-c-cpp/array.md
       - foundation/restudy-c-cpp/char-and-string.md
+      - foundation/restudy-c-cpp/struct-and-union.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
