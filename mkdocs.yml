@@ -102,6 +102,7 @@ nav:
       - foundation/restudy-c-cpp/char-and-string.md
       - foundation/restudy-c-cpp/struct-and-union.md
       - foundation/restudy-c-cpp/dynamic-memory.md
+      - foundation/restudy-c-cpp/struct-and-pointer.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
