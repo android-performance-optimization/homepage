@@ -18,7 +18,7 @@
 如果定义中的stuff非常长，它可以分成几行，除了最后一行之外，每行的末尾都要加一个反斜杠。
 
 ### 宏
-#define机制包括了一个规定，允许把参数替换到文本中，这种实现通常称为宏 (macro)或定义宏(defined macro)。下面是宏的声明方式：
+`#define`机制包括了一个规定，允许把参数替换到文本中，这种实现通常称为宏 (macro)或定义宏(defined macro)。下面是宏的声明方式：
 
 ```c
 define　name(parameter-list
