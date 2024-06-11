@@ -3,6 +3,7 @@
 - [Linux C编程一站式学习](https://akaedu.github.io/book/)
 - [编程高手必学的内存知识](https://time.geekbang.org/column/intro/100094901)
 - [小林 x 图解计算机基础](https://xiaolincoding.com/)
+- [Teach Yourself Computer Science](https://teachyourselfcs.com/)
 
 ## 性能优化专栏
 - [Android 开发高手课](https://time.geekbang.org/column/intro/142)
