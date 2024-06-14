@@ -1,9 +1,8 @@
 ## 计算机基础
 - [CS自学指南](https://csdiy.wiki/)
-- [Linux C编程一站式学习](https://akaedu.github.io/book/)
-- [编程高手必学的内存知识](https://time.geekbang.org/column/intro/100094901)
-- [小林 x 图解计算机基础](https://xiaolincoding.com/)
 - [Teach Yourself Computer Science](https://teachyourselfcs.com/)
+- [小林 x 图解计算机基础](https://xiaolincoding.com/)
+- [Linux C编程一站式学习](https://akaedu.github.io/book/)
 
 ## 性能优化专栏
 - [Android 开发高手课](https://time.geekbang.org/column/intro/142)
@@ -13,7 +12,8 @@
 
 ## 书籍推荐
 - [程序员的自我修养——链接、装载与库](https://book.douban.com/subject/3652388/)
-- [深入理解Android：Java虚拟机ART](https://book.douban.com/subject/33390277/)
+- [C 和指针](https://book.douban.com/subject/3012360/)
+- [计算机系统要素](https://book.douban.com/subject/1998341//)
 
 ## 开源项目
 - [https://github.com/Tencent/matrix](https://github.com/Tencent/matrix)
