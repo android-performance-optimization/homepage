@@ -105,6 +105,8 @@ nav:
       - foundation/pointers-on-c/struct-and-pointer.md
       - foundation/pointers-on-c/advanced-pointer.md
       - foundation/pointers-on-c/preprocessor.md
+    - 计算机系统要素:
+      - foundation/nand-to-tetris/introduction.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
