@@ -107,6 +107,7 @@ nav:
       - foundation/pointers-on-c/preprocessor.md
     - 计算机系统要素:
       - foundation/nand-to-tetris/introduction.md
+      - foundation/nand-to-tetris/bool-logic.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
