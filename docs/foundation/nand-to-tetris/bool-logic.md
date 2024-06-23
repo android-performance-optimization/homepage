@@ -97,6 +97,11 @@ CHIP Xor {
 
 ### Mux
 ```
+/** 
+ * Multiplexor:
+ * if (sel = 0) out = a, else out = b
+ */
+
 CHIP Mux {
     IN a, b, sel;
     OUT out;
