@@ -49,7 +49,7 @@ if (x != 0){
 
 ![](https://raw.gitmirror.com/RicardoJiang/resource/main/2024/june/p15.png)
 
-Hack 的ALU 计算一组固定的函数out=f（，y），这里x和y是芯片的两个 16-位输入，out是芯片的16-位输出，f是位于一个函数表中的函数，该函数表由18个固定函数组成。
+Hack 的ALU 计算一组固定的函数out=f（x，y），这里x和y是芯片的两个 16-位输入，out是芯片的16-位输出，f是位于一个函数表中的函数，该函数表由18个固定函数组成。
 
 我们通过设置六个称为控制位（control bits）的输入位来告诉 ALU 用哪一个函数来进行何种函数计算。下图给出了用伪代码表示的详细的输入/输出规范。
 
