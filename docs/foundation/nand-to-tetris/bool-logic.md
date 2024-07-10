@@ -214,6 +214,11 @@ CHIP Or16 {
 
 ### Mux16
 ```
+/**
+ * 16-bit multiplexor: 
+ * for i = 0, ..., 15:
+ * if (sel = 0) out[i] = a[i], else out[i] = b[i]
+ */
 CHIP Mux16 {
     IN a[16], b[16], sel;
     OUT out[16];
@@ -257,6 +262,13 @@ CHIP Or8Way {
 
 ### Mux4Way16
 ```
+/**
+ * 4-way 16-bit multiplexor:
+ * out = a if sel = 00
+ *       b if sel = 01
+ *       c if sel = 10
+ *       d if sel = 11
+ */
 CHIP Mux4Way16 {
     IN a[16], b[16], c[16], d[16], sel[2];
     OUT out[16];
@@ -298,6 +310,13 @@ CHIP Mux8Way16 {
 
 ### DMux4Way
 ```
+/**
+ * 4-way demultiplexor:
+ * [a, b, c, d] = [in, 0, 0, 0] if sel = 00
+ *                [0, in, 0, 0] if sel = 01
+ *                [0, 0, in, 0] if sel = 10
+ *                [0, 0, 0, in] if sel = 11
+ */
 CHIP DMux4Way {
     IN in, sel[2];
     OUT a, b, c, d;

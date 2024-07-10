@@ -11,3 +11,4 @@ Nand2Tetris 即从与非门到俄罗斯方块，本书将告诉你，如何从�
 - [在线 IDE](https://nand2tetris.github.io/web-ide/chip/)
 - [https://github.com/woai3c/nand2tetris](https://github.com/woai3c/nand2tetris)
 - [https://reionchan.github.io/2015/08/27/the-elements-of-computing-systems/](https://reionchan.github.io/2015/08/27/the-elements-of-computing-systems/)
+- [https://www.jianshu.com/u/55c13cb0d3f8](https://www.jianshu.com/u/55c13cb0d3f8)
