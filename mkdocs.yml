@@ -113,6 +113,7 @@ nav:
       - foundation/nand-to-tetris/machine-language.md
       - foundation/nand-to-tetris/computer-architecture.md
       - foundation/nand-to-tetris/assembler.md
+      - foundation/nand-to-tetris/virtual-machine-one.md
     - Android 系统基础:
       - foundation/framework/activity-start.md
     - 实用工具系列:
