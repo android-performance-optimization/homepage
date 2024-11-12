@@ -89,6 +89,7 @@ nav:
       - foundation/kotlin-meta-programming/meta-programming-debug.md
     - Kolin 编译器学习:
       - foundation/kotlin-compiler-learn/learning-resource.md
+      - foundation/kotlin-compiler-learn/kotlin-compiler-start.md
     - C 和指针:
       - foundation/pointers-on-c/environment-config.md
       - foundation/pointers-on-c/quick-start.md
