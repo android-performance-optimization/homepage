@@ -1,8 +1,8 @@
 # Kotlin 编译器源码阅读
-### 产物构建
+## 产物构建
 通过执行 `./gradlew dist` 命令，可以将编译器分发到 `dist/kotlinc/` 目录下。
 
-### 如何调试 Kotlin 编译器
+## 如何调试 Kotlin 编译器
 ```
 java_version="$(findJavaVersion)"
 if [[ $java_version -ge 9 ]]; then
@@ -41,7 +41,7 @@ String[] testArgs = {"-cp",  "./dist/kotlinc/lib/kotlin-compiler.jar", "org.jetb
             run(testArgs);
 ```
 
-### Kotlin/JS 编译器调试
+## Kotlin/JS 编译器调试
 ```
 export KOTLIN_COMPILER=org.jetbrains.kotlin.cli.js.K2JSCompiler
 
