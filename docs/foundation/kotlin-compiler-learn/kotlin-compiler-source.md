@@ -65,3 +65,57 @@ String[] testArgs = {"-cp",  "./dist/kotlinc/lib/kotlin-compiler.jar", "org.jetb
 > JFlex 设计用于与 Scott Hudson 的 LALR 解析器生成器 CUP 共同使用，以及用于 Bob Jamison 修改自 Berkeley Yacc 的 Java 版本 BYacc/J。它也可以与其他解析器生成器（如 ANTLR）一起使用，或者作为独立工具使用。
 
 // TODO 字元化画图
+
+## 语法分析
+这一步的输入是 Tokens, 根据 Kotlin 的语法规则处理 Tokens，输出 AST(abstrace syntax tree)。
+
+Kotlin 的语法规则可见：[https://kotlinlang.org/docs/reference/grammar.html](https://kotlinlang.org/docs/reference/grammar.html)。以下是 class 的定义，当遍历 tokens 列表时，如果碰到了 class 或者 interface 关键字，后续的 tokens 则按类或者 interface 来解析，其他语法规则也是如此，如果碰到不符合语法规则的语句则会报错。
+
+```
+classDeclaration (used by declaration)
+  : modifiers? ('class' | ('fun'? 'interface'))
+    simpleIdentifier typeParameters?
+    primaryConstructor?
+    (':' delegationSpecifiers)?
+    typeConstraints?
+    (classBody | enumClassBody)?
+  ;
+```
+
+K1 与 K2 在语法分析阶段的输出略有不同, K2 在语法分析阶段会返回一个更加轻量级的语法树，构建速度更快，但后续无法创建 PSI。
+
+```
+  /**
+   * 返回解析的结果。在调用此方法之前，所有的标记必须已经完成或被丢弃。
+   *
+   * @return 构建的 AST 树
+   */
+  @NotNull
+  ASTNode getTreeBuilt();
+
+  /**
+   * 与 getTreeBuilt() 相同，但返回一个轻量级的树，构建速度更快，产生的垃圾更少，但无法创建一个 PSI（程序结构接口）。
+   *
+   * @return 轻量级的语法树
+   */
+  @NotNull
+  FlyweightCapableTreeStructure<LighterASTNode> getLightTree();
+```
+
+相比 ASTNode，LighterASTNode 更加轻量化，接口中只有几个方法。
+
+```
+public interface LighterASTNode {
+  LighterASTNode[] EMPTY_ARRAY = new LighterASTNode[0];
+
+  IElementType getTokenType();
+
+  int getStartOffset();
+
+  int getEndOffset();
+
+  default int getTextLength() {
+    return getEndOffset() - getStartOffset();
+  }
+}
+```
