@@ -53,7 +53,7 @@ DIR="${BASH_SOURCE[0]%/*}"
 
 通过以上代码可知，`org.jetbrains.kotlin.cli.js.K2JSCompiler` 是 Kotlin/JS 编译器的主类，我们可以通过修改`K2JSCompiler`类，运行它的`main`方法，即可启动与调试 Kotlin/JS 编译器。
 
-需要注意的是，K2 版本编译器不还不支持直接把 Kotlin 代码编译成 JS 代码，因此需要先把代码编译成 Klib，再把 Klib 编译成 JS 代码，同时 outputDir 不支持相对路径，只支持绝对路径，如下所示
+需要注意的是，K2 版本编译器不还不支持直接把 Kotlin 代码编译成 JS 代码, 具体可见[KT-67089](https://youtrack.jetbrains.com/issue/KT-67089/K-JS-CLI-Compiling-.kt-.js-in-one-shot-is-not-possible)，因此需要先把代码编译成 Klib，再把 Klib 编译成 JS 代码，同时 outputDir 不支持相对路径，只支持绝对路径，如下所示
 
 ```
 #!/bin/sh
