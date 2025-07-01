@@ -92,6 +92,7 @@ nav:
       - foundation/kotlin-compiler-learn/kotlin-compiler-start.md
       - foundation/kotlin-compiler-learn/kotlin-compiler-source.md
       - foundation/kotlin-compiler-learn/kotlin-jack-backend.md
+      - foundation/kotlin-compiler-learn/kotlin-native-compiler.md
     - C 和指针:
       - foundation/pointers-on-c/environment-config.md
       - foundation/pointers-on-c/quick-start.md
