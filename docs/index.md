@@ -1,4 +1,4 @@
-# ![Image title](https://raw.gitmirror.com/RicardoJiang/resource/main/2023/june/title.jpg)
+# ![Image title](https://raw.githubusercontent.com/RicardoJiang/resource/refs/heads/main/2023/june/title.jpg)
 性能优化是 Android 开发进阶必备技能之一，是项目开发过程中的重点，痛点同时也是难点。
 
 这里是 Andriod 性能优化手册，专注于 Android 性能优化领域，分享基础知识，实战方案，学习路线，技术动态等资源
